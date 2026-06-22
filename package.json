@@ -1,0 +1,19 @@
+{
+  "name": "electronics-shop",
+  "version": "1.0.0",
+  "description": "Full-stack e-commerce website with React and Node.js/Express",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "start-backend": "cd backend && npm run dev",
+    "start-frontend": "cd frontend && npm start",
+    "build-frontend": "cd frontend && npm run build",
+    "prod": "concurrently \"cd backend && npm run prod\" \"cd frontend && npm run serve\"",
+    "test-backend": "echo 'No tests configured'",
+    "test-frontend": "cd frontend && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
