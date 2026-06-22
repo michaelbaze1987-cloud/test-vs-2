@@ -6,7 +6,7 @@ import { findDemoUserByCredentials } from "@/lib/demo-users";
 import type { Role } from "@/types/domain";
 import { loginSchema } from "@/validators/auth";
 
-const providers = [
+const providers: NextAuthOptions["providers"] = [
   Credentials({
     name: "Email",
     credentials: {

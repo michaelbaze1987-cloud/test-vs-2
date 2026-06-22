@@ -1,4 +1,5 @@
-import { demoUsers, type Role } from "@/lib/demo-users";
+import { demoUsers } from "@/lib/demo-users";
+import type { Role } from "@/types/domain";
 
 export type Category = {
   id: string;

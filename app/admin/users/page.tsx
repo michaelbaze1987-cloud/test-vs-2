@@ -14,7 +14,7 @@ export default async function AdminUsersPage() {
         <table className="w-full min-w-160 text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-left text-slate-500">
-              <th className="px-4 py-3">Nom</th>
+              <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Email</th>
               <th className="px-4 py-3">Inscription</th>
             </tr>
