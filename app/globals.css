@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #eff6ff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #cbd5e1;
+  --primary: #0f766e;
+  --primary-strong: #115e59;
+  --accent: #f59e0b;
+  --danger: #b91c1c;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-body);
+}
+
+body {
+  background:
+    radial-gradient(1200px circle at 0 0, #dbeafe 0%, transparent 45%),
+    radial-gradient(1200px circle at 100% 0, #ccfbf1 0%, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.container-shell {
+  margin: 0 auto;
+  width: min(1120px, 100% - 2rem);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: all 180ms ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #f8fafc;
+  padding: 0.65rem 1rem;
+}
+
+.btn-primary:hover {
+  background: var(--primary-strong);
+}
+
+.btn-secondary {
+  background: var(--surface-alt);
+  border-color: var(--border);
+  color: var(--text);
+  padding: 0.6rem 0.95rem;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.62rem 0.75rem;
+  background: #fff;
+}
+
+.field:focus {
+  outline: 2px solid #67e8f9;
+  outline-offset: 1px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #99f6e4;
+  background: #ecfeff;
+  color: #0f766e;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
