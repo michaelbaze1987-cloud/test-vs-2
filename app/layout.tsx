@@ -28,9 +28,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentHour = new Date().getHours();
+  const isDarkMode = currentHour >= 19 || currentHour < 7;
+
   return (
-    <html lang="fr" className={`${bodyFont.variable} ${headingFont.variable}`}>
-      <body className="min-h-screen">{children}</body>
+    <html
+      lang="fr"
+      className={`${bodyFont.variable} ${headingFont.variable} ${isDarkMode ? "theme-dark" : "theme-light"}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen overflow-x-hidden">{children}</body>
     </html>
   );
 }

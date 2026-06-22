@@ -4,8 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
-import { loginSchema } from "@/validators/auth";
-
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,16 +20,18 @@ export function LoginForm() {
     const email = String(formData.get("email") ?? "");
     const password = String(formData.get("password") ?? "");
 
-    const parsed = loginSchema.safeParse({ email, password });
-    if (!parsed.success) {
+    const normalizedEmail = email.trim().toLowerCase();
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
+
+    if (!isEmailValid || password.trim().length < 8) {
       setMessage("Identifiants invalides");
       setPending(false);
       return;
     }
 
     const result = await signIn("credentials", {
-      email: parsed.data.email,
-      password: parsed.data.password,
+      email: normalizedEmail,
+      password,
       redirect: false,
     });
 
@@ -46,12 +46,15 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card mx-auto w-full max-w-md space-y-4 p-6">
-      <h1 className="text-2xl font-semibold">Connexion</h1>
-      <p className="text-sm text-slate-600">
+    <form onSubmit={onSubmit} className="glass-panel mx-auto w-full max-w-md space-y-5 p-7">
+      <div>
+        <p className="section-kicker">Acces client</p>
+        <h1 className="mt-2 text-3xl font-semibold text-white">Connexion</h1>
+      </div>
+      <p className="text-sm text-slate-300">
         Connectez-vous pour suivre vos commandes et gerer votre panier.
       </p>
-      <p className="rounded-md border border-amber-300 bg-amber-50 p-2 text-xs text-amber-900">
+      <p className="rounded-2xl border border-amber-300/35 bg-amber-400/10 p-3 text-xs text-amber-100">
         Mode demo: admin@demo.local / Admin123! ou client@demo.local / Client123!
       </p>
 
@@ -70,7 +73,7 @@ export function LoginForm() {
       </div>
 
       {message ? (
-        <p className="text-sm text-red-700" aria-live="polite">
+        <p className="text-sm text-red-300" aria-live="polite">
           {message}
         </p>
       ) : null}

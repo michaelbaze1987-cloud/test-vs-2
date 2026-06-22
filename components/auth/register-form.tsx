@@ -17,9 +17,12 @@ export function RegisterForm() {
   }, [router, state.success]);
 
   return (
-    <form action={formAction} className="card mx-auto w-full max-w-md space-y-4 p-6">
-      <h1 className="text-2xl font-semibold">Creer un compte</h1>
-      <p className="text-sm text-slate-600">
+    <form action={formAction} className="glass-panel mx-auto w-full max-w-md space-y-5 p-7">
+      <div>
+        <p className="section-kicker">Inscription</p>
+        <h1 className="mt-2 text-3xl font-semibold text-white">Creer un compte</h1>
+      </div>
+      <p className="text-sm text-slate-300">
         Creer un compte client pour sauvegarder votre panier et vos commandes.
       </p>
 
@@ -45,7 +48,7 @@ export function RegisterForm() {
       </div>
 
       {state.message && !state.success ? (
-        <p className="text-sm text-red-700" aria-live="polite">
+        <p className="text-sm text-red-300" aria-live="polite">
           {state.message}
         </p>
       ) : null}

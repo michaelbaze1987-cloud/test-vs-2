@@ -88,6 +88,15 @@ export type OrderWithRelations = Order & {
   items: Array<OrderItem & { product: ProductWithRelations }>;
 };
 
+export type OrderTimelineStep = {
+  status: OrderStatus;
+  label: string;
+  description: string;
+  at: Date;
+  reached: boolean;
+  current: boolean;
+};
+
 const now = () => new Date();
 const uid = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
@@ -229,6 +238,13 @@ export function getAllProducts() {
     .map(toProductWithRelations);
 }
 
+export function getAdminProducts() {
+  return products
+    .slice()
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .map(toProductWithRelations);
+}
+
 export function getProductBySlug(slug: string) {
   const product = products.find((item) => item.slug === slug && item.isActive);
   return product ? toProductWithRelations(product) : null;
@@ -237,6 +253,10 @@ export function getProductBySlug(slug: string) {
 export function getProductById(id: string) {
   const product = products.find((item) => item.id === id);
   return product ? toProductWithRelations(product) : null;
+}
+
+export function getAdminProductById(id: string) {
+  return getProductById(id);
 }
 
 export function getAllCategories() {
@@ -511,7 +531,7 @@ export function createOrderFromCart(userId: string) {
     id: uid(),
     userId,
     total,
-    status: "PAID",
+    status: "PENDING",
     createdAt: now(),
     updatedAt: now(),
   };
@@ -538,11 +558,74 @@ export function createOrderFromCart(userId: string) {
   return order;
 }
 
+function resolveOrderStatus(order: Order): OrderStatus {
+  if (order.status === "CANCELLED") {
+    return "CANCELLED";
+  }
+
+  const elapsed = Date.now() - order.createdAt.getTime();
+
+  if (elapsed >= 1000 * 60 * 60 * 24 * 4) {
+    return "DELIVERED";
+  }
+
+  if (elapsed >= 1000 * 60 * 60 * 24 * 2) {
+    return "SHIPPED";
+  }
+
+  if (elapsed >= 1000 * 60 * 30) {
+    return "PROCESSING";
+  }
+
+  return "PENDING";
+}
+
+export function getOrderTimeline(order: Order) {
+  const currentStatus = resolveOrderStatus(order);
+  const base = order.createdAt.getTime();
+
+  const steps: Array<Omit<OrderTimelineStep, "reached" | "current">> = [
+    {
+      status: "PENDING",
+      label: "Commande confirmee",
+      description: "Votre paiement a ete enregistre et la commande est creee.",
+      at: new Date(base),
+    },
+    {
+      status: "PROCESSING",
+      label: "En preparation",
+      description: "Le fournisseur prepare votre colis et verifie la disponibilite.",
+      at: new Date(base + 1000 * 60 * 30),
+    },
+    {
+      status: "SHIPPED",
+      label: "En cours d'acheminement",
+      description: "Le colis a ete confie au transporteur international.",
+      at: new Date(base + 1000 * 60 * 60 * 24 * 2),
+    },
+    {
+      status: "DELIVERED",
+      label: "Livree",
+      description: "La commande a ete marquee comme livree a destination.",
+      at: new Date(base + 1000 * 60 * 60 * 24 * 4),
+    },
+  ];
+
+  const currentIndex = steps.findIndex((step) => step.status === currentStatus);
+
+  return steps.map((step, index) => ({
+    ...step,
+    reached: index <= currentIndex,
+    current: index === currentIndex,
+  }));
+}
+
 export function listOrders(): OrderWithRelations[] {
   return orders
     .slice()
     .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
     .map((order) => {
+      const resolvedStatus = resolveOrderStatus(order);
       const user = demoUsers.find((entry) => entry.id === order.userId);
       const mappedUser = user
         ? {
@@ -576,10 +659,15 @@ export function listOrders(): OrderWithRelations[] {
 
       return {
         ...order,
+        status: resolvedStatus,
         user: mappedUser,
         items,
       };
     });
+}
+
+export function listOrdersByUser(userId: string) {
+  return listOrders().filter((order) => order.user.id === userId);
 }
 
 export function listCustomers() {

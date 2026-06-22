@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { auth } from "@/auth";
-import { createOrderFromCartAction } from "@/actions/orders/create-order";
 import { removeFromCartAction } from "@/actions/cart/remove-from-cart";
 import { updateCartQuantityAction } from "@/actions/cart/update-quantity";
 import { getCartByUserId } from "@/lib/mock-store";
@@ -70,11 +70,9 @@ export default async function CartPage() {
           <aside className="card space-y-3 p-5">
             <p className="text-sm uppercase tracking-wide text-slate-500">Recapitulatif</p>
             <p className="text-2xl font-semibold text-teal-700">{subtotal.toFixed(2)} EUR</p>
-            <form action={createOrderFromCartAction}>
-              <button className="btn btn-primary w-full" type="submit">
-                Valider et creer la commande
-              </button>
-            </form>
+            <Link href="/checkout" className="btn btn-primary w-full">
+              Passer au paiement
+            </Link>
           </aside>
         </>
       )}

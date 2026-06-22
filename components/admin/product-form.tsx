@@ -58,7 +58,20 @@ export function ProductForm({ product }: ProductFormProps) {
           <label htmlFor="imageUrl" className="text-sm font-medium">
             URL image
           </label>
-          <input className="field" id="imageUrl" name="imageUrl" type="url" defaultValue={product?.imageUrl} required />
+          <input className="field" id="imageUrl" name="imageUrl" type="url" defaultValue={product?.imageUrl} placeholder="https://..." />
+        </div>
+
+        <div className="space-y-1 md:col-span-2">
+          <label htmlFor="imageFile" className="text-sm font-medium">
+            Charger une image produit
+          </label>
+          <input
+            className="field file:mr-4 file:rounded-full file:border-0 file:bg-cyan-500/15 file:px-4 file:py-2 file:text-cyan-100"
+            id="imageFile"
+            name="imageFile"
+            type="file"
+            accept="image/*"
+          />
         </div>
 
         <div className="space-y-1 md:col-span-2">

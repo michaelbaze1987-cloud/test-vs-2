@@ -1,19 +1,25 @@
+import { StorefrontSettingsForm } from "@/components/admin/storefront-settings-form";
+import { getStorefrontConfig } from "@/lib/storefront-config";
+
 export const metadata = {
   title: "Admin Parametres",
 };
 
-export default function AdminSettingsPage() {
+export default async function AdminSettingsPage() {
+  const config = await getStorefrontConfig();
+
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-semibold">Parametres de la boutique</h1>
-      <div className="card space-y-2 p-5 text-sm text-slate-600">
-        <p>Ce module est pret pour brancher:</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>cles Stripe/Resend/Cloudinary;</li>
-          <li>marges globales et taxes;</li>
-          <li>parametrage multi-devise et multi-langue.</li>
-        </ul>
+    <div className="space-y-6">
+      <div>
+        <p className="section-kicker">Back office</p>
+        <h1 className="section-title text-3xl">Parametres de la boutique</h1>
+        <p className="mt-2 max-w-2xl text-sm text-slate-300">
+          Configurez l'identite de marque, les bannieres du storefront et le contexte de
+          votre boutique sans base de donnees. Les donnees sont conservees localement.
+        </p>
       </div>
+
+      <StorefrontSettingsForm config={config} />
     </div>
   );
 }

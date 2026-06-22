@@ -4,11 +4,18 @@ import { revalidateTag } from "next/cache";
 
 import { requireRole } from "@/lib/auth-guards";
 import { updateProduct } from "@/lib/mock-store";
+import { saveUploadedAsset } from "@/lib/storefront-config";
 import { slugify } from "@/lib/utils";
 import { productSchema } from "@/validators/product";
 
 export async function updateProductAction(productId: string, formData: FormData) {
   await requireRole("ADMIN");
+
+  const imageFile = formData.get("imageFile");
+  const uploadedImageUrl =
+    imageFile instanceof File && imageFile.size > 0
+      ? await saveUploadedAsset(imageFile, `product-${productId}`)
+      : "";
 
   const parsed = productSchema.safeParse({
     name: formData.get("name"),
@@ -27,13 +34,19 @@ export async function updateProductAction(productId: string, formData: FormData)
     throw new Error("Formulaire produit invalide");
   }
 
+  const imageUrl = uploadedImageUrl || parsed.data.imageUrl || "";
+
+  if (!imageUrl) {
+    throw new Error("Ajoutez une image produit via URL ou fichier.");
+  }
+
   const categorySlug = slugify(parsed.data.categoryName);
 
   updateProduct(productId, {
     name: parsed.data.name,
     slug: slugify(parsed.data.slug),
     description: parsed.data.description,
-    imageUrl: parsed.data.imageUrl,
+    imageUrl,
     price: parsed.data.price,
     stock: parsed.data.stock,
     categoryName: parsed.data.categoryName,
