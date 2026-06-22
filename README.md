@@ -1,85 +1,36 @@
-# Electronics E-commerce Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This workspace contains a complete e-commerce project with:
-- React frontend
-- Node.js + Express backend
-- Product catalog and cart API
-- User authentication (register/login)
-- Stripe payment integration
+## Getting Started
 
-## Setup
+First, run the development server:
 
-### Installation rapide (tout en une commande)
-```bash
-npm run install-all
-```
-
-### Installation manuelle
-1. Install backend dependencies:
-   ```bash
-   cd backend
-   npm install
-   ```
-
-2. Install frontend dependencies:
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-## Lancement
-
-### Mode développement (frontend + backend simultanément)
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### Lancer uniquement le backend
-```bash
-npm run start-backend
-```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Lancer uniquement le frontend
-```bash
-npm run start-frontend
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Build frontend pour production
-```bash
-npm run build-frontend
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Mode production (frontend + backend)
-```bash
-npm run prod
-```
+## Learn More
 
-## Scripts disponibles
+To learn more about Next.js, take a look at the following resources:
 
-### Root package.json
-- `npm run install-all` - Installe toutes les dépendances
-- `npm run dev` - Lance backend et frontend en développement
-- `npm run start-backend` - Lance uniquement le backend
-- `npm run start-frontend` - Lance uniquement le frontend
-- `npm run build-frontend` - Build le frontend pour production
-- `npm run prod` - Lance l'app en production
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Backend scripts
-- `npm start` - Lance le serveur (production)
-- `npm run dev` - Lance avec nodemon (développement)
-- `npm run debug` - Lance en mode debug (port 9229)
-- `npm run prod` - Lance en mode production avec NODE_ENV=production
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Frontend scripts
-- `npm start` - Lance le dev server
-- `npm run build` - Build pour production
-- `npm run serve` - Sert le build de production
-- `npm test` - Lance les tests
+## Deploy on Vercel
 
-## Notes
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- The backend uses in-memory data storage for demo purposes.
-- Replace Stripe keys in `backend/.env` and `frontend/.env` with real values before production use.
-- The app uses local storage for user session persistence.
-# test-vs
-ntm
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
