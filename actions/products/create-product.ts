@@ -56,6 +56,6 @@ export async function createProductAction(formData: FormData) {
     costPrice: parsed.data.costPrice,
   });
 
-  revalidateTag("products");
-  revalidateTag("categories");
+  revalidateTag("products", "max");
+  revalidateTag("categories", "max");
 }

@@ -10,6 +10,6 @@ export async function deleteProductAction(productId: string) {
 
   deleteProduct(productId);
 
-  revalidateTag("products");
-  revalidateTag("categories");
+  revalidateTag("products", "max");
+  revalidateTag("categories", "max");
 }
