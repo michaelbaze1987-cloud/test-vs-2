@@ -28,8 +28,12 @@ const defaultConfig: StorefrontConfig = {
 };
 
 async function ensureParentDirs() {
-  await mkdir(path.dirname(configPath), { recursive: true });
-  await mkdir(uploadsDir, { recursive: true });
+  try {
+    await mkdir(path.dirname(configPath), { recursive: true });
+    await mkdir(uploadsDir, { recursive: true });
+  } catch {
+    // Filesystem may be read-only (e.g. Vercel serverless) – silently ignore
+  }
 }
 
 export async function getStorefrontConfig(): Promise<StorefrontConfig> {
@@ -52,7 +56,7 @@ export async function getStorefrontConfig(): Promise<StorefrontConfig> {
           : defaultConfig.bannerUrls,
     };
   } catch {
-    await saveStorefrontConfig(defaultConfig);
+    // File unreadable or filesystem locked – return defaults without writing
     return defaultConfig;
   }
 }
