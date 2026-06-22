@@ -82,4 +82,4 @@ npm run prod
 - Replace Stripe keys in `backend/.env` and `frontend/.env` with real values before production use.
 - The app uses local storage for user session persistence.
 # test-vs
-ntm
+ntm yeah man !
