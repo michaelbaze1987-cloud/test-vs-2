@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #1e1e1e;
-  --color-surface: rgba(192, 192, 192, 0.08);
-  --color-surface-strong: rgba(110, 110, 110, 0.16);
-  --color-border: rgba(192, 192, 192, 0.22);
-  --color-text: #c0c0c0;
-  --color-muted: #6e6e6e;
-  --color-primary: #00a8ff;
-  --color-primary-strong: #0082cc;
-  --color-focus: rgba(0, 168, 255, 0.35);
+  --bg: #1e1e1e;
+  --surface: rgba(192, 192, 192, 0.08);
+  --surface-strong: rgba(110, 110, 110, 0.16);
+  --border: rgba(192, 192, 192, 0.22);
+  --text: #c0c0c0;
+  --muted: #6e6e6e;
+  --primary: #00a8ff;
+  --primary-strong: #0082cc;
+  --focus: rgba(0, 168, 255, 0.35);
 }
 
 html {
@@ -19,11 +19,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(0, 168, 255, 0.18), transparent 25%),
-    radial-gradient(circle at top right, rgba(192, 192, 192, 0.08), transparent 30%),
-    linear-gradient(180deg, #1e1e1e 0%, #141414 55%, #1e1e1e 100%);
-  color: var(--color-text);
+  background: linear-gradient(180deg, #1e1e1e 0%, #141414 50%, #1e1e1e 100%);
+  color: var(--text);
   font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -37,7 +34,7 @@ body {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -62,8 +59,8 @@ button {
 }
 
 .card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 24px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
   backdrop-filter: blur(18px);
@@ -78,7 +75,7 @@ button {
 }
 
 .section-kicker {
-  color: var(--color-primary);
+  color: var(--primary);
   font-size: 0.75rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -89,7 +86,7 @@ button {
   font-size: clamp(1.8rem, 2vw, 2.5rem);
   line-height: 1.05;
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--text);
 }
 
 .btn {
@@ -99,7 +96,7 @@ button {
   gap: 0.5rem;
   border-radius: 999px;
   padding: 0.85rem 1.4rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   font-weight: 700;
   transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
@@ -109,34 +106,34 @@ button {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: var(--primary);
   color: #1e1e1e;
   box-shadow: 0 10px 30px rgba(0, 168, 255, 0.22);
 }
 
 .btn-primary:hover {
-  background: var(--color-primary-strong);
+  background: var(--primary-strong);
 }
 
 .btn-secondary {
   background: rgba(192, 192, 192, 0.10);
-  color: var(--color-text);
+  color: var(--text);
 }
 
 .field {
   width: 100%;
   padding: 0.85rem 1rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border);
   border-radius: 18px;
   background: rgba(192, 192, 192, 0.05);
-  color: var(--color-text);
+  color: var(--text);
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .field:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px var(--color-focus);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--focus);
 }
 
 .badge {
@@ -146,13 +143,13 @@ button {
   border-radius: 999px;
   background: rgba(0, 168, 255, 0.12);
   border: 1px solid rgba(0, 168, 255, 0.22);
-  color: var(--color-primary);
+  color: var(--primary);
   font-size: 0.78rem;
   font-weight: 700;
 }
 
 .text-muted {
-  color: var(--color-muted);
+  color: var(--muted);
 }
 
 hr {
