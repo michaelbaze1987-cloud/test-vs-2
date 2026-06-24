@@ -1,137 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #eaf2ff;
-  --bg-secondary: #dbeafe;
-  --surface: rgba(255, 255, 255, 0.78);
-  --surface-strong: rgba(255, 255, 255, 0.92);
-  --surface-alt: rgba(214, 237, 255, 0.72);
-  --text: #06152d;
-  --muted: #45607f;
-  --border: rgba(78, 133, 194, 0.40);
-  --primary: #0d5fff;
-  --primary-strong: #0845bf;
-  --accent: #61dafb;
-  --danger: #ef4444;
-  --hero-glow: rgba(18, 94, 255, 0.2);
-  --shadow-color: rgba(10, 35, 66, 0.14);
-  /* Semantic text tokens – adapt per theme */
-  --color-heading:     #06152d;
-  --color-body:        #1e3a5f;
-  --color-muted:       #4a6280;
-  --color-accent-text: #0052cc;
-}
-
-.theme-dark {
-  --bg: #020814;
-  --bg-secondary: #071123;
-  --surface: rgba(8, 19, 38, 0.74);
-  --surface-strong: rgba(8, 19, 38, 0.92);
-  --surface-alt: rgba(7, 27, 51, 0.72);
-  --text: #eff6ff;
-  --muted: #8ca0bf;
-  --border: rgba(112, 157, 255, 0.18);
-  --primary: #5ba2ff;
-  --primary-strong: #8bc1ff;
-  --accent: #67e8f9;
-  --danger: #f87171;
-  --hero-glow: rgba(42, 112, 255, 0.24);
-  --shadow-color: rgba(0, 0, 0, 0.32);
-  /* Semantic text tokens – adapt per theme */
-  --color-heading:     #f1f5f9;
-  --color-body:        #cbd5e1;
-  --color-muted:       #94a3b8;
-  --color-accent-text: #67e8f9;
-}
-
-@theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--text);
-  --font-sans: var(--font-body);
+  --color-bg: #1e1e1e;
+  --color-surface: rgba(192, 192, 192, 0.08);
+  --color-surface-strong: rgba(110, 110, 110, 0.16);
+  --color-border: rgba(192, 192, 192, 0.22);
+  --color-text: #c0c0c0;
+  --color-muted: #6e6e6e;
+  --color-primary: #00a8ff;
+  --color-primary-strong: #0082cc;
+  --color-focus: rgba(0, 168, 255, 0.35);
 }
 
 html {
-  color-scheme: light;
-}
-
-.theme-dark {
   color-scheme: dark;
 }
 
 body {
-  background:
-    radial-gradient(900px circle at 12% 14%, var(--hero-glow) 0%, transparent 36%),
-    radial-gradient(1000px circle at 92% 10%, rgba(96, 165, 250, 0.12) 0%, transparent 34%),
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-secondary) 78%, transparent), transparent 30%),
-    var(--bg);
-  color: var(--text);
-  font-family: var(--font-body), sans-serif;
+  margin: 0;
   min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0, 168, 255, 0.18), transparent 25%),
+    radial-gradient(circle at top right, rgba(192, 192, 192, 0.08), transparent 30%),
+    linear-gradient(180deg, #1e1e1e 0%, #141414 55%, #1e1e1e 100%);
+  color: var(--color-text);
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 78%);
-  opacity: 0.45;
+* {
+  box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-heading), sans-serif;
+::selection {
+  background: rgba(0, 168, 255, 0.35);
+  color: #1e1e1e;
 }
 
 a {
-  color: inherit;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 .container-shell {
-  margin: 0 auto;
   width: min(1220px, 100% - 2rem);
+  margin: 0 auto;
 }
 
 .card {
-  border: 1px solid var(--border);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 24px;
-  background: var(--surface);
-  backdrop-filter: blur(24px);
-  box-shadow: 0 16px 60px var(--shadow-color);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
 }
 
 .glass-panel {
-  border: 1px solid var(--border);
+  background: rgba(192, 192, 192, 0.06);
+  border: 1px solid rgba(192, 192, 192, 0.18);
   border-radius: 28px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 84%, transparent), var(--surface)),
-    var(--surface);
-  box-shadow: 0 24px 80px var(--shadow-color);
-  backdrop-filter: blur(24px);
-}
-
-.panel-grid {
-  display: grid;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(20px);
 }
 
 .section-kicker {
-  color: var(--color-accent-text);
+  color: var(--color-primary);
   font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .section-title {
   font-size: clamp(1.8rem, 2vw, 2.5rem);
+  line-height: 1.05;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  color: var(--color-text);
 }
 
 .btn {
@@ -140,11 +98,10 @@ a {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  font-weight: 600;
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease,
-    background 180ms ease;
-  cursor: pointer;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--color-border);
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .btn:hover {
@@ -152,99 +109,71 @@ a {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 72%, white));
-  color: #f8fafc;
-  padding: 0.75rem 1.1rem;
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--primary) 24%, transparent);
+  background: var(--color-primary);
+  color: #1e1e1e;
+  box-shadow: 0 10px 30px rgba(0, 168, 255, 0.22);
 }
 
 .btn-primary:hover {
-  background: var(--primary-strong);
+  background: var(--color-primary-strong);
 }
 
 .btn-secondary {
-  background: var(--surface-alt);
-  border-color: var(--border);
-  color: var(--text);
-  padding: 0.7rem 1rem;
+  background: rgba(192, 192, 192, 0.10);
+  color: var(--color-text);
 }
 
 .field {
   width: 100%;
-  border: 1px solid var(--border);
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
   border-radius: 18px;
-  padding: 0.82rem 1rem;
-  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
-  color: var(--text);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(192, 192, 192, 0.05);
+  color: var(--color-text);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .field:focus {
-  outline: 2px solid color-mix(in srgb, var(--color-accent-text) 75%, transparent);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-focus);
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid color-mix(in srgb, var(--color-accent-text) 30%, transparent);
-  background: color-mix(in srgb, var(--color-accent-text) 10%, transparent);
-  color: var(--color-accent-text);
-  padding: 0.2rem 0.7rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
+  background: rgba(0, 168, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.22);
+  color: var(--color-primary);
   font-size: 0.78rem;
-  backdrop-filter: blur(14px);
+  font-weight: 700;
 }
 
-.tech-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
+.text-muted {
+  color: var(--color-muted);
 }
 
-.hero-shell {
-  position: relative;
-  overflow: hidden;
+hr {
+  border: none;
+  border-top: 1px solid rgba(192, 192, 192, 0.18);
 }
 
-.hero-shell::after {
-  content: "";
-  position: absolute;
-  inset: auto -10% -32% 20%;
-  height: 320px;
-  background: radial-gradient(circle, rgba(90, 171, 255, 0.18) 0%, transparent 60%);
-  pointer-events: none;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 168, 255, 0.4) rgba(30, 30, 30, 0.48);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LIGHT-MODE TEXT CONTRAST
-   In daytime mode the page bg is light. Most component colors were designed
-   for dark mode. These rules lift unreadable colors globally.
-   .dark-surface elements (header, footer, hero) are restored below.
-   ═══════════════════════════════════════════════════════════════════════ */
-.theme-light .text-white     { color: var(--text); }
-.theme-light .text-slate-100 { color: var(--color-heading); }
-.theme-light .text-slate-200 { color: var(--color-heading); }
-.theme-light .text-slate-300 { color: var(--color-body); }
-.theme-light .text-slate-400 { color: var(--color-muted); }
-.theme-light .text-slate-500 { color: var(--color-muted); }
-.theme-light .text-cyan-100  { color: var(--color-accent-text); }
-.theme-light .text-cyan-200  { color: var(--color-accent-text); }
-.theme-light .text-amber-100 { color: #92400e; }
-.theme-light .text-red-300   { color: #b91c1c; }
+*::-webkit-scrollbar {
+  width: 10px;
+}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   DARK-SURFACE RESTORATION
-   Intentionally dark backgrounds: header, footer, hero slideshow.
-   Restore light-on-dark colors (rule placed after overrides → same
-   specificity means this one wins for .dark-surface elements).
-   ═══════════════════════════════════════════════════════════════════════ */
-.dark-surface .text-white     { color: #f1f5f9; }
-.dark-surface .text-slate-100 { color: #f1f5f9; }
-.dark-surface .text-slate-200 { color: #e2e8f0; }
-.dark-surface .text-slate-300 { color: #cbd5e1; }
-.dark-surface .text-slate-400 { color: #94a3b8; }
-.dark-surface .text-slate-500 { color: #64748b; }
-.dark-surface .text-cyan-100  { color: #cffafe; }
-.dark-surface .text-cyan-200  { color: #a5f3fc; }
-.dark-surface .text-amber-100 { color: #fef3c7; }
-.dark-surface .text-red-300   { color: #fca5a5; }
+*::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.48);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 168, 255, 0.5);
+  border-radius: 999px;
+}
